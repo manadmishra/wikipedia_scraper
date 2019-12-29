@@ -1,0 +1,53 @@
+***Crash (computing)***
+
+ 
+
+ In computing, a  crash , or  system crash , occurs when a computer program such as a software application or an operating system stops functioning properly and exits. The program responsible may appear to hang until a crash reporting service reports the crash and any details relating to it. If the program is a critical part of the operating system, the entire system may crash or hang, often resulting in a kernel panic or fatal system error.
+ Most crashes are the result of executing invalid machine instructions. Typical causes include incorrect address values in the program counter, buffer overflow, overwriting a portion of the affected program code due to an earlier bug, accessing invalid memory addresses, using an illegal opcode or triggering an unhandled exception. The original software bug that started this chain of events is typically considered to be the cause of the crash, which is discovered through the process of debugging. The original bug can be far removed from the code that actually crashed.
+ In earlier personal computers, attempting to write data to hardware addresses outside the system's main memory could cause hardware damage. Some crashes are exploitable and let a malicious program or hacker to execute arbitrary code allowing the replication of viruses or the acquisition of data which would normally be inaccessible.
+ 
+
+ **Application crashes**
+
+ An application typically crashes when it performs an operation that is not allowed by the operating system. The operating system then triggers an exception or signal in the application. Unix applications traditionally responded to the signal by dumping core. Most Windows and Unix GUI applications respond by displaying a dialogue box (such as the one shown to the right) with the option to attach a debugger if one is installed. Some applications attempt to recover from the error and continue running instead of exiting.
+ Typical errors that result in application crashes include:
+ 
+ attempting to read or write memory that is not allocated for reading or writing by that application (segmentation fault) or x86 specific (general protection fault) 
+ attempting to execute privileged or invalid instructions 
+ attempting to perform I/O operations on hardware devices to which it does not have permission to access 
+ passing invalid arguments to system calls 
+ attempting to access other system resources to which the application does not have permission to access 
+ attempting to execute machine instructions with bad arguments (depending on CPU architecture): divide by zero, operations on denormal number or NaN (not a number) values, memory access to unaligned addresses, etc. 
+
+ **Crash to desktop**
+
+ A "crash to desktop" is said to occur when a program (commonly a video game) unexpectedly quits, abruptly taking the user back to the desktop. Usually, the term is applied only to crashes where no error is displayed, hence all the user sees as a result of the crash is the desktop. Many times there is no apparent action that causes a crash to desktop. During normal function, the program may freeze for a shorter period of time, and then close by itself. Also during normal function, the program may become a black screen and play the last few seconds of sound (depending on the size of the data buffer) that was being played repeatedly before it crashes to desktop. Other times it may appear to be triggered by a certain action, such as loading an area.
+ Crash to desktop bugs are considered particularly problematic for users. Since they frequently display no error message, it can be very difficult to track down the source of the problem, especially if the times they occur and the actions taking place right before the crash do not appear to have any pattern or common ground. One way to track down the source of the problem for games is to run them in windowed-mode. Windows Vista has a feature that can help track down the cause of a CTD problem when it occurs on any program. Windows XP included a similar feature as well. Some computer programs, such as  StepMania  and BBC's  Bamzooki , also crash to desktop if in full-screen, but display the error in a separate window when the user has returned to the desktop.
+ 
+
+ **Web server crashes**
+
+ The software running the web server behind a website may crash, rendering it inaccessible entirely or providing only an error message instead of normal content.
+ For example: if a site is using an SQL database (such as MySQL) for a script (such as PHP) and that SQL database server crashes, then PHP will display a connection error.
+ 
+
+ **Operating system crashes**
+
+ An operating system crash commonly occurs when a hardware exception occurs that cannot be handled. Operating system crashes can also occur when internal sanity-checking logic within the operating system detects that the operating system has lost its internal self-consistency.
+ Modern multi-tasking operating systems, such as Linux, and macOS, usually remain unharmed when an application program crashes.
+ Some operating systems, e.g., z/OS, have facilities for Reliability, availability and serviceability (RAS) and the OS can recover from the crash of a critical component, whether due to hardware failure, e.g., uncorrectable ECC error, or to software failure, e.g., a reference to an unassigned page.
+ 
+
+ **Security and privacy implications of crashes**
+
+ Depending on the application, the crash may contain the user's sensitive and private information. Moreover, many software bugs which cause crashes are also exploitable for arbitrary code execution and other types of privilege escalation. For example, a stack buffer overflow can overwrite the return address of a subroutine with an invalid value, which will cause a segmentation fault when the subroutine returns. However, if an exploit overwrites the return address with a valid value, the code in that address will be executed.
+ 
+
+ **Crash reproduction**
+
+ When crashes are collected in the field using a crash reporter, the next step for developers is to be able to reproduce them locally. For this, several techniques exist:
+STAR uses symbolic execution,
+MuCrash mutates the test code of the application that has crashed,
+and EvoCrash performs evolutionary search. 
+
+ 

@@ -47,3 +47,448 @@ simultaneous multithreading
 implementation specifics
 details
 taxonomy
+contents
+example
+introduction
+parallel and distributed computing
+architectures
+applications
+examples
+theoretical foundations
+complexity measures
+election
+properties of distributed systems
+standard problems
+policies
+bélády's algorithm
+first in first out (fifo)
+last in first out (lifo)
+least recently used (lru)
+time aware least recently used (tlru)
+most recently used (mru)
+pseudo-lru (plru)
+random replacement (rr)
+segmented lru (slru)
+least-frequently used (lfu)
+least frequent recently used (lfru)
+lfu with dynamic aging (lfuda)
+low inter-reference recency set (lirs)
+adaptive replacement cache (arc)
+clock with adaptive replacement (car)
+multi queue (mq)
+pannier: container-based caching algorithm for compound objects
+definition
+coherence mechanisms
+snooping
+directory-based
+coherence protocols
+idealized cache model
+typical cache usage
+cache stampede mitigation
+locking
+external recomputation
+probabilistic early expiration
+benefits
+potential design elements
+the kernel
+system management
+working together as an operating system
+the price of complexity
+coherent memory abstraction
+file system abstraction
+transaction abstraction
+persistence abstraction
+coordinator abstraction
+reliability abstraction
+distributed computing models
+three basic distributions
+organization
+connection
+control
+design considerations
+transparency
+inter-process communication
+process management
+resource management
+reliability
+availability
+synchronization
+flexibility
+research
+replicated model extended to a component object model
+complexity/trust exposure through accepted responsibility
+multi/many-core focused systems
+distributed processing over extremes in heterogeneity
+effective and stable in multiple levels of complexity
+types of operating systems
+single-tasking and multi-tasking
+single- and multi-user
+distributed
+templated
+embedded
+real-time
+library
+unix and unix-like operating systems
+bsd and its descendants
+macos
+linux
+microsoft windows
+other
+components
+kernel
+program execution
+interrupts
+modes
+memory management
+virtual memory
+multitasking
+disk access and file systems
+device drivers
+networking
+security
+user interface
+graphical user interfaces
+real-time operating systems
+operating system development as a hobby
+diversity of operating systems and portability
+application crashes
+crash to desktop
+web server crashes
+operating system crashes
+security and privacy implications of crashes
+crash reproduction
+subcategories
+roles
+instruction set architecture
+computer organization
+implementation
+design goals
+power efficiency
+background
+amdahl's law and gustafson's law
+dependencies
+race conditions, mutual exclusion, synchronization, and parallel slowdown
+fine-grained, coarse-grained, and embarrassing parallelism
+consistency models
+flynn's taxonomy
+types of parallelism
+bit-level parallelism
+instruction-level parallelism
+task parallelism
+memory and communication
+classes of parallel computers
+multi-core computing
+symmetric multiprocessing
+distributed computing
+specialized parallel computers
+software
+parallel programming languages
+automatic parallelization
+application checkpointing
+algorithmic methods
+fault tolerance
+biological brain as massively parallel computer
+issues
+theory
+logics
+practice
+multiprogramming
+cooperative multitasking
+preemptive multitasking
+real time
+memory protection
+memory swapping
+programming
+cost
+when to switch
+interrupt handling
+user and kernel mode switching
+steps
+hardware vs. software
+primary process states
+created
+ready
+running
+kernel mode
+user mode
+blocked
+terminated
+additional process states
+swapped out and waiting
+swapped out and blocked
+key topics
+processor symmetry
+master/slave multiprocessor system
+instruction and data streams
+processor coupling
+tightly coupled multiprocessor system
+loosely coupled multiprocessor system
+design
+uses
+advantages/disadvantages
+alternatives
+variable smp
+kernel-level critical sections
+software lockout mitigation
+concurrency control in databases
+database transaction and the acid rules
+why is concurrency control needed?
+concurrency control mechanisms
+categories
+methods
+major goals of concurrency control mechanisms
+correctness
+distribution
+other major subjects of attention
+citations
+concurrency control in operating systems
+definition of linearizability
+linearizability versus serializability
+linearization points
+primitive atomic instructions
+high-level atomic operations
+examples of linearizability
+counters
+non-atomic
+atomic
+compare-and-swap
+fetch-and-increment
+types
+granularity
+database locks
+lack of composability
+language support
+need for critical sections
+implementation of critical sections
+uses of critical sections
+critical sections in data structures
+critical sections in computer networking
+problem description
+enforcing mutual exclusion
+hardware solutions
+software solutions
+bound on the mutual exclusion problem
+recoverable mutual exclusion
+types of mutual exclusion devices
+motivation
+practical use
+software emulation
+acquisition
+release
+important observations
+semantics and implementation
+trivial example
+login queue
+producer–consumer problem
+operation names
+semaphores vs. mutexes
+conceptual advantages and disadvantages
+composable operations
+proposed language support
+transactional locking
+implementation issues
+implementations
+c/c++
+c#
+clojure
+common lisp
+erlang
+f#
+groovy
+haskell
+java
+javascript
+ocaml
+perl
+python
+ruby
+scala
+smalltalk
+other languages
+characteristics
+service models
+infrastructure as a service (iaas)
+platform as a service (paas)
+software as a service (saas)
+mobile "backend" as a service (mbaas)
+serverless computing
+function as a service (faas)
+deployment models
+private cloud
+public cloud
+hybrid cloud
+others
+community cloud
+distributed cloud
+multicloud
+poly cloud
+big data cloud
+hpc cloud
+cloud engineering
+security and privacy
+limitations and disadvantages
+emerging trends
+digital forensics in the cloud
+table of common time complexities
+constant time
+logarithmic time
+polylogarithmic time
+sub-linear time
+linear time
+quasilinear time
+sub-quadratic time
+polynomial time
+strongly and weakly polynomial time
+complexity classes
+superpolynomial time
+quasi-polynomial time
+relation to np-complete problems
+sub-exponential time
+first definition
+second definition
+exponential time hypothesis
+exponential time
+double exponential time
+space complexity classes
+relationships between classes
+logspace
+dimensions
+indexing
+1d-indexing
+2d-indexing
+hardware perspective
+streaming multiprocessors
+warps
+programming abilities
+limitations
+gpus supported
+language bindings
+current and future usages of cuda architecture
+operation
+purpose
+large servers
+clusters
+appliances
+operating systems
+routing and resource discovery
+unstructured networks
+structured networks
+hybrid models
+coopnet content distribution system
+security and trust
+routing attacks
+corrupted data and malware
+resilient and scalable computer networks
+distributed storage and search
+content delivery
+file-sharing networks
+multimedia
+energy trading
+other p2p applications
+social implications
+incentivizing resource sharing and cooperation
+privacy and anonymity
+network neutrality
+mobile ad hoc networks (manets)
+vehicular ad hoc networks (vanets)
+smartphone ad hoc networks (spans)
+imanets
+wireless mesh networks
+army tactical manets
+air force uav ad hoc networks
+navy ad hoc networks
+wireless sensor networks
+ad hoc home smart lighting
+ad hoc street light networks
+ad hoc network of robots
+disaster rescue ad hoc network
+hospital ad hoc network
+data monitoring and mining
+challenges
+advantages for users
+implementation difficulties
+side effects
+radios for ad hoc
+protocol stack
+routing
+proactive routing
+distance vector routing
+reactive routing
+flooding
+hybrid routing
+position-based routing
+technical requirements for implementation
+medium-access control
+software reprogramming
+simulation
+emulation testbed
+mathematical models
+trust management
+prevention
+typographical errors
+development methodologies
+code analysis
+instrumentation
+testing
+debugging
+benchmark of bugs
+bug management
+severity
+priority
+software releases
+arithmetic
+logic
+syntax
+resource
+multi-threading
+interfacing
+teamworking
+implications
+well-known bugs
+in popular culture
+software engineering
+software design
+object-oriented programming
+methodological
+configuration management
+specification
+techniques
+generate-and-validate
+synthesis-based
+data-driven
+use
+search space
+limitations of automatic bug-fixing
+example tools
+c
+proprietary
+causes
+environment change
+onceability
+unused code
+rarely updated code
+classification
+dormant rot
+active rot
+refactoring
+methodologies
+software development activities
+identification of need
+planning
+designing
+implementation, testing and documenting
+deployment and maintenance
+subtopics
+view model
+business process and data modelling
+computer-aided software engineering
+integrated development environment
+modeling language
+programming paradigm
+reuse of solutions
+roles and industry
+specific applications
+design concepts
+design patterns
+technique
+usage

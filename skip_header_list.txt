@@ -15,3 +15,48 @@ notes
 example of a priority inversion
 historical implementations
 modern commercial implementations
+posix threads for windows
+an example
+other problems
+products
+description
+1950s
+the dyseac
+lincoln tx-2
+intercommunicating cells
+foundational work
+mainframes
+microcomputers
+market share
+shifts in market demand
+sources
+pre-history
+background and history
+burroughs b5000 and b5500
+cdc 6500 and 6700
+decsystem-10
+pdp-11/74
+vax-11/782
+ibm system/370 model 168
+analytical studies
+history of linearizability
+library analogy
+etymology
+early history
+2000s
+2010s
+similar concepts
+version features and specifications
+historical development
+copyright infringements
+political implications
+intellectual property law and illegal sharing
+current research
+history on packet radio
+early work on manet
+"bugs in the system" report
+social and business operations
+organizational
+project management
+vulnerability disclosure policy violations
+notable programs

@@ -1,0 +1,29 @@
+***POSIX Threads***
+POSIX Threads , usually referred to as  pthreads , is an execution model that exists independently from a language, as well as a parallel execution model.  It allows a program to control multiple different flows of work that overlap in time.  Each flow of work is referred to as a  thread , and creation and control over these flows is achieved by making calls to the POSIX Threads API. POSIX Threads is an API defined by the standard  POSIX.1c, Threads extensions (IEEE Std 1003.1c-1995) .
+ Implementations of the API are available on many Unix-like POSIX-conformant operating systems such as FreeBSD, NetBSD, OpenBSD, Linux, macOS, Android, Solaris, Redox, and AUTOSAR Adaptive, typically bundled as a library  libpthread . DR-DOS and Microsoft Windows implementations also exist: within the SFU/SUA subsystem which provides a native implementation of a number of POSIX APIs, and also within third-party packages such as  pthreads-w32 , which implements  pthreads  on top of existing Windows API.
+ 
+
+ **Contents**
+
+ pthreads  defines a set of C programming language types, functions and constants. It is implemented with a  pthread.h  header and a thread library.
+ There are around 100 threads procedures, all prefixed  pthread_  and they can be categorized into four groups:
+ 
+ Thread management - creating, joining threads etc. 
+ Mutexes 
+ Condition variables 
+ Synchronization between threads using read/write locks and barriers The POSIX semaphore API works with POSIX threads but is not part of threads standard, having been defined in the  POSIX.1b, Real-time extensions (IEEE Std 1003.1b-1993)  standard. Consequently, the semaphore procedures are prefixed by  sem_  instead of  pthread_ .
+ 
+
+ **Example**
+
+ An example illustrating the use of  pthreads  in C:
+ 
+
+ This program creates five threads, each executing the function  perform_work  that prints the unique number of this thread to standard output.  If a programmer wanted the threads to communicate with each other, this would require defining a variable outside of the scope of any of the functions, making it a global variable. This program can be compiled using the gcc compiler with the following command:
+ 
+ gcc pthreads_demo.c -lpthread -o pthreads_demo
+ 
+ Here is one of the many possible outputs from running this program.
+ 
+
+ 

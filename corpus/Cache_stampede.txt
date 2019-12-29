@@ -1,0 +1,68 @@
+***Cache stampede***
+A  cache stampede  is a type of cascading failure that can occur when massively parallel computing systems with caching mechanisms come under very high load. This behaviour is sometimes also called  dog-piling . To understand how cache stampedes occur, consider a web server that uses memcached to cache rendered pages for some period of time, to ease system load. Under particularly high load to a single URL, the system remains responsive as long as the resource remains cached, with requests being handled by accessing the cached copy. This minimizes the expensive rendering operation.
+ Under low load, cache misses result in a single recalculation of the rendering operation. The system will continue as before, with average load being kept very low because of the high cache hit rate.
+ However, under  very  heavy load, when the cached version of that page expires, there may be sufficient concurrency in the server farm that multiple threads of execution will all attempt to render the content of that page simultaneously. Systematically, none of the concurrent servers know that the others are doing the same rendering at the same time. If sufficiently high load is present, this may by itself be enough to bring about congestion collapse of the system via exhausting shared resources. Congestion collapse results in preventing the page from ever being completely re-rendered and re-cached, as every attempt to do so times out. Thus, cache stampede reduces the cache hit rate to zero and keeps the system continuously in congestion collapse as it attempts to regenerate the resource for as long as the load remains very heavy.
+ To give a concrete example, assume the page in consideration takes 3 seconds to render and we have a traffic of 10 requests per second. Then, when the cached page expires, we have 30 processes simultaneously recomputing the rendering of the page and updating the cache with the rendered page.
+ 
+
+ **Typical cache usage**
+
+ Below is a typical cache usage pattern for an item that needs to be updated every  ttl  units of time:
+ 
+   function  fetch( key ,  ttl ) {
+    value  ← cache_read( key )
+    if  (! value ) {
+      value  ← recompute_value()
+     cache_write( key ,  value ,  ttl )
+   }
+    return   value 
+ }
+ 
+ If the function  recompute_value()  takes a long time and the key is accessed frequently, many processes will simultaneously call  recompute_value()  upon expiration of the cache value.
+ In typical web applications, the function  recompute_value()  may query a database, access other services, or perform some complicated operation (which is why this particular computation is being cached in the first place). When the request rate is high, the database (or any other shared resource) will suffer from an overload of requests/queries, which may in turn cause a system collapse.
+ 
+
+ **Cache stampede mitigation**
+
+ Several approaches have been proposed to mitigate cache stampedes. (Also known as dogpile prevention) They can be roughly grouped in 3 main categories.
+ 
+
+ **Locking**
+
+ To prevent multiple simultaneous recomputations of the same value, upon a cache miss a process will attempt to acquire the lock for that cache key and recompute it only if it acquires it.
+ There are different implementation options for the case when the lock is  not  acquired:
+ 
+ Wait until the value is recomputed 
+ Return a "not-found" and have the client handle the absence of the value properly 
+ Keep a stale item in the cache to be used while the new value is recomputed If implemented properly, locking can prevent stampedes altogether, but requires an extra write for the locking mechanism. Apart from doubling the number of writes, the main drawback is a correct implementation of the locking mechanism which also takes care of edge cases including failure of the process acquiring the lock, tuning of a time-to-live for the lock, race-conditions, and so on.
+ 
+
+ **External recomputation**
+
+ This solution moves the recomputation of the cache value from the processes needing it to an external process. The recomputation of the external process can be triggered in different ways:
+ 
+ When the cache value approaches its expiration 
+ Periodically 
+ When a process needing the value encounters a cache miss This approach requires one more moving part - the external process - that needs to be maintained and monitored. In addition, this solution requires unnatural code separation/duplication and is mostly suited for static cache keys (i.e., not dynamically generated, as in the case of keys indexed by an id).
+ 
+
+ **Probabilistic early expiration**
+
+ With this approach, each process may recompute the cache value before its expiration by making an independent probabilistic decision, where the probability of performing the early recomputation increases as we get closer to the expiration of the value. Since the probabilistic decision is made independently by each process, the effect of the stampede is mitigated as fewer processes will expire at the same time.
+ The following implementation based on an exponential distribution has been shown to be optimal in terms of its effectiveness in preventing stampedes and how early recomputations can happen. 
+   function  x-fetch( key ,  ttl ,  beta =1) {
+    value ,  delta ,  expiry  ← cache_read( key )
+   if (! value  || time() −  delta  *  beta  * log(rand(0,1)) ≥  expiry ) {
+      start  ← time()
+      value  ← recompute_value()
+      delta  ← time() – start
+     cache_write( key , ( value ,  delta ),  ttl )
+   }
+    return   value 
+ }
+ 
+ The parameter  beta  can be set to a value greater than 1 to favor earlier recomputations and further reduce stampedes but the authors show that setting  beta =1 works well in practice. The variable  delta  represents the time to recompute the value and is used to scale the probability distribution appropriately.
+ This approach is simple to implement and effectively reduces cache stampedes by automatically favoring early recomputations when the traffic rate increases. One drawback is that it takes more memory in cache as we need to bundle the value  delta  with the cache item - when the caching system does not support retrieval of the key expiration time, we also need to store the  expiry  (that is,  time() +  ttl ) in the bundle.
+ 
+
+ 

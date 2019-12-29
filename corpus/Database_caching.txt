@@ -1,0 +1,23 @@
+***Database caching***
+Database caching  is a process included in the design of computer applications which generate web pages on-demand (dynamically) by accessing backend databases.
+ When these applications are deployed on multi-tier environments that involve browser-based clients, web application servers and backend databases, middle-tier database caching is used to achieve high scalability and performance. In a three tier architecture, the application software tier and data storage tier can be in different hosts. Throughput of an application can be limited by the network speed. This limitation can be minimized by having the database at the application tier. Because commercial database software makes extensive use of system resources, it is not always practical to have the application and the database at the same host. In this case, a more light-weight database application can be used to cache data from the commercial database management system.
+ 
+
+ **Benefits**
+
+ Database caching improves scalability by distributing query workload from backend to multiple cheap front-end systems.  It allows flexibility in the processing of data; for example, the data of Platinum customers can be cached while that of ordinary customers are not.  Caching can improve availability of data, by providing continued service for applications that depend only on cached tables even if the backend server is unavailable.  Another benefit is improved data access speeds brought about by locality of data and smoothing out load peaks by avoiding round-trips between middle-tier and data-tier. 
+
+ **Potential design elements**
+
+ Updateable cache tables:  Many cache systems are read-only which limits their usage to small segment of the applications, non-real time applications. 
+ Bi-Directional updates: For updateable caches, updates, which happen in cache, should be propagated to the target database and any updates that happen directly on the target database should come to cache automatically. 
+ Synchronous and asynchronous update propagation: The updates on cache table shall be propagated to target database in two modes. Synchronous mode makes sure that after the database operation completes the updates are applied at the target database as well. In case of Asynchronous mode the updates are delayed to the target database. Synchronous mode gives high cache consistency and is suited for real time applications. Asynchronous mode gives high throughput and is suited for near real time applications. 
+ Multiple cache granularity - Database level, Table level and Result-set caching: Major portions of corporate databases are historical and infrequently accessed. But, there is some information that should be instantly accessible like premium customer's data, etc. 
+ Recovery for cached tables: In case of system or power failure, during the restart of caching platform all the committed transactions on the cached tables should be recovered. 
+ Tools to validate the coherence of cache: In case of asynchronous mode of update propagation, cache at different cache nodes and target database may diverge. This needs to be resolved manually, with mismatches identified and corrective measures taken if required. 
+ Horizontally scalable: Cluster computing may increase availability and achieve load balancing. Caching in a clustered environment spans multiple nodes, keeping the cached data coherent across nodes. 
+ Transparent access to non-cached tables reside in target database: Database cache should keep track of queries and should be able to intelligently route to the database cache or to the origin database based on the data locality without any application code modification. 
+ Transparent Fail over: There should not be any service outages in case of caching platform failure. Client connections should be routed to the target database. 
+ No or very few changes to application: Support for standard interfaces JDBC, ODBC etc. that will make the application to work seamlessly without any application code changes. It should route all stored procedure calls to target database so that they don’t need to be migrated. 
+
+ 

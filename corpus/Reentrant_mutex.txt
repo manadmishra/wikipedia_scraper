@@ -1,0 +1,67 @@
+***Reentrant mutex***
+
+In computer science, the  reentrant mutex  ( recursive mutex ,  recursive lock ) is a particular type of mutual exclusion (mutex) device that may be locked multiple times by the same process/thread, without causing a deadlock.
+ While any attempt to perform the "lock" operation on an ordinary mutex (lock) would either fail or block when the mutex is already locked, on a recursive mutex this operation will succeed if and only if the locking thread is the one that already holds the lock. Typically, a recursive mutex tracks the number of times it has been locked, and requires equally many unlock operations to be performed before other threads may lock it.
+ 
+
+ **Motivation**
+
+ Recursive mutexes solve the problem of non-reentrancy with regular mutexes: if a function that takes a lock and executes a callback is itself called by the callback, deadlock ensues. In pseudocode, that is the following situation:
+ 
+ var  m : Mutex  // A non-recursive mutex, initially unlocked.
+
+ function  lock_and_call(i : Integer)
+    m.lock()
+    callback(i)
+    m.unlock()
+
+ function  callback(i : Integer)
+     if  i > 0
+        lock_and_call(i - 1)
+
+lock_and_call(1)  // Invoking the function
+ 
+ Given these definitions, the function call  lock_and_call(1)  will cause the following sequence of events:
+ 
+ m.lock()  — mutex locked 
+ callback(1) 
+ lock_and_call(0)  — because  i > 0 
+ m.lock()  — deadlock, because  m  is already locked, so the executing thread will block, waiting for itself. Replacing the mutex with a recursive one solves the problem, because the final  m.lock()  will succeed without blocking.
+ 
+
+ **Practical use**
+
+ W. Richard Stevens notes that recursive locks are "tricky" to use correctly, and recommends their use for adapting single-threaded code without changing APIs, but "only when no other solution is possible". The Java language's native synchronization mechanism, monitor, uses recursive locks. Syntactically, a lock is a block of code with the 'synchronized' keyword preceding it and any Object reference in parentheses that will be used as the mutex. Inside the synchronized block, the given object can be used as a condition variable by doing a wait(), notify(), or notifyAll() on it. Thus all Objects are both recursive mutexes and condition variables. 
+
+ **Example**
+
+ Thread A calls function F which acquires a reentrant lock for itself before proceeding 
+ Thread B calls function F which attempts to acquire a reentrant lock for itself but cannot due to one already outstanding, resulting in either a block (it waits), or a timeout if requested 
+ Thread A's F calls itself recursively. It already owns the lock, so it will not block itself (no deadlock). This is the central idea of a reentrant mutex, and is what makes it different from a regular lock. 
+ Thread B's F is still waiting, or has caught the timeout and worked around it 
+ Thread A's F finishes and releases its lock(s) 
+ Thread B's F can now acquire a reentrant lock and proceed if it was still waiting 
+
+ **Software emulation**
+
+ Software emulation can be accomplished using the following structure: 
+ A "control" condition using a regular lock 
+ Owner identifier, unique to each thread (defaulting to empty / not set) 
+ Acquisition count (defaulting to zero) 
+
+ **Acquisition**
+
+ Acquire the control condition. 
+ If the owner is set and not the current thread, wait for the control condition to be notified (this also releases the condition). 
+ Set the owner to the current thread. The owner identifier should have already been cleared at this point unless the acquirer is already the owner. 
+ Increment the acquisition count (should always result in 1 for new owners). 
+ Release the control condition. 
+
+ **Release**
+
+ Acquire the control condition, asserting that the owner is the releaser. 
+ Decrement the acquisition count, asserting that the count is greater than or equal to zero. 
+ If the acquisition count is zero, clear the owner information and notify the control condition. 
+ Release the control condition. 
+
+ 

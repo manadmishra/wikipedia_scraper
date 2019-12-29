@@ -1,0 +1,11 @@
+***Shared-nothing architecture***
+A  shared-nothing architecture  ( SN ) is a distributed-computing architecture in which each update request is satisfied by a single node (processor/memory/storage unit). The intent is to eliminate contention among nodes. Nodes do not share (independently access) memory or storage. One alternative architecture is shared everything, in which requests are satisfied by arbitrary combinations of nodes. This may introduce contention, as multiple nodes may seek to update the same data at the same time. 
+ SN eliminates single points of failure, allowing the overall system to continue operating despite failures in individual nodes and allowing individual nodes to upgrade without a system-wide shutdown. A SN system can scale simply by adding nodes, since no central resource bottlenecks the system. Another term for SN is  sharding . A SN system typically partitions its data among many nodes. A refinement is to replicate commonly used but infrequently modified data across many nodes, allowing more requests to be resolved on a single node.
+ 
+
+ **Applications**
+
+ Shared-nothing is popular for web development. PHP is a good example of such a programming language. 
+ Shared-nothing architectures are prevalent for data warehousing applications, although requests that require data from multiple nodes can dramatically reduce throughput. 
+
+ 

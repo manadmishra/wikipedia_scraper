@@ -1,0 +1,138 @@
+***Distributed operating system***
+A  distributed operating system  is a software over a collection of independent, networked, communicating, and physically separate computational nodes.
+They handle jobs which are serviced by multiple CPUs. Each individual node holds a specific software subset of the global aggregate operating system. Each subset is a composite of two distinct service provisioners. The first is a ubiquitous minimal kernel, or microkernel, that directly controls that node's hardware. Second is a higher-level collection of  system management components  that coordinate the node's individual and collaborative activities. These components abstract microkernel functions and support user applications. The microkernel and the management components collection work together. They support the system's goal of integrating multiple resources and processing functionality into an efficient and stable system. This seamless integration of individual nodes into a global system is referred to as  transparency , or  single system image ; describing the illusion provided to users of the global system's appearance as a single computational entity.
+ 
+
+ **Overview**
+
+ **The kernel**
+
+ At each locale (typically a node), the kernel provides a minimally complete set of node-level utilities necessary for operating a node's underlying hardware and resources. These mechanisms include allocation, management, and disposition of a node's resources, processes, communication, and input/output management support functions. Within the kernel, the communications sub-system is of foremost importance for a distributed OS. In a distributed OS, the kernel often supports a minimal set of functions, including low-level address space management, thread management, and inter-process communication (IPC). A kernel of this design is referred to as a  microkernel . Its modular nature enhances reliability and security, essential features for a distributed OS. It is common for a kernel to be identically replicated over all nodes in a system and therefore that the nodes in a system use similar hardware. The combination of minimal design and ubiquitous node coverage enhances the global system's extensibility, and the ability to dynamically introduce new nodes or services. 
+
+ **System management**
+
+ System management components are software processes that define the node's  policies . These components are the part of the OS outside the kernel. These components provide higher-level communication, process and resource management, reliability, performance and security. The components match the functions of a single-entity system, adding the transparency required in a distributed environment. The distributed nature of the OS requires additional services to support a node's responsibilities to the global system. In addition, the system management components accept the "defensive" responsibilities of reliability, availability, and persistence. These responsibilities can conflict with each other. A consistent approach, balanced perspective, and a deep understanding of the overall system can assist in identifying diminishing returns. Separation of policy and mechanism mitigates such conflicts. 
+
+ **Working together as an operating system**
+
+ The architecture and design of a distributed operating system must realize both individual node and global system goals. Architecture and design must be approached in a manner consistent with separating policy and mechanism. In doing so, a distributed operating system attempts to provide an efficient and reliable distributed computing framework allowing for an absolute minimal user awareness of the underlying command and control efforts. The multi-level collaboration between a kernel and the system management components, and in turn between the distinct nodes in a distributed operating system is the functional challenge of the distributed operating system. This is the point in the system that must maintain a perfect harmony of purpose, and simultaneously maintain a complete disconnect of intent from implementation. This challenge is the distributed operating system's opportunity to produce the foundation and framework for a reliable, efficient, available, robust, extensible, and scalable system. However, this opportunity comes at a very high cost in complexity.
+ 
+
+ **The price of complexity**
+
+ In a distributed operating system, the exceptional degree of inherent complexity could easily render the entire system an anathema to any user. As such, the logical price of realizing a distributed operation system must be calculated in terms of overcoming vast amounts of complexity in many areas, and on many levels. This calculation includes the depth, breadth, and range of design investment and architectural planning required in achieving even the most modest implementation. These design and development considerations are critical and unforgiving. For instance, a deep understanding of a distributed operating system's overall architectural and design detail is required at an exceptionally early point. An exhausting array of design considerations are inherent in the development of a distributed operating system. Each of these design considerations can potentially affect many of the others to a significant degree. This leads to a massive effort in balanced approach, in terms of the individual design considerations, and many of their permutations. As an aid in this effort, most rely on documented experience and research in distributed computing power.
+ 
+
+ **Distributed computing models**
+
+ 
+
+ **Three basic distributions**
+
+ To better illustrate this point, examine three system architectures; centralized, decentralized, and distributed. In this examination, consider three structural aspects: organization, connection, and control. Organization describes a system's physical arrangement characteristics. Connection covers the communication pathways among nodes. Control manages the operation  of the earlier two considerations.
+ 
+
+ **Organization**
+
+ A centralized system has one level of structure, where all constituent elements directly depend upon a single control element. A decentralized system is hierarchical. The bottom level unites subsets of a system's entities. These entity subsets in turn combine at higher levels, ultimately culminating at a central master element. A distributed system is a collection of autonomous elements with no concept of levels.
+ 
+
+ **Connection**
+
+ Centralized systems connect constituents directly to a central master entity in a hub and spoke fashion. A decentralized system (aka network system) incorporates direct and indirect paths between constituent elements and the central entity. Typically this is configured as a hierarchy with only one shortest path between any two elements. Finally, the distributed operating system requires no pattern; direct and indirect connections are possible between any two elements. Consider the 1970s phenomena of “string art” or a spirograph drawing as a fully connected system, and the spider's web or the Interstate Highway System between U.S. cities as examples of a  partially connected system .
+ 
+
+ **Control**
+
+ Centralized and decentralized systems have directed flows of connection to and from the central entity, while distributed systems communicate along arbitrary paths. This is the pivotal notion of the third consideration. Control involves allocating tasks and data to system elements balancing efficiency, responsiveness and complexity.
+ Centralized and decentralized systems  offer more control, potentially easing administration by limiting options. Distributed systems are more difficult to explicitly control, but scale better horizontally and offer fewer points of system-wide failure. The associations conform to the needs imposed by its design but not by organizational chaos
+ 
+
+ **Design considerations**
+
+ **Transparency**
+
+ Transparency  or  single-system image  refers to the ability of an application to treat the system on which it operates without regard to whether it is distributed and without regard to hardware or other implementation details. Many areas of a system can benefit from transparency, including access, location, performance, naming, and migration. The consideration of transparency directly affects decision making in every aspect of design of a distributed operating system. Transparency can impose certain requirements and/or restrictions on other design considerations.
+ Systems can optionally violate transparency to varying degrees to meet specific application requirements. For example, a distributed operating system may present a hard drive on one computer as "C:" and a drive on another computer as "G:". The user does not require any knowledge of device drivers or the drive's location; both devices work the same way, from the application's perspective. A less transparent interface might require the application to know which computer hosts the drive. Transparency domains:
+ 
+ Location transparency  – Location transparency comprises two distinct aspects of transparency, naming transparency and user mobility. Naming transparency requires that nothing in the physical or logical references to any system entity should expose any indication of the entity's location, or its local or remote relationship to the user or application. User mobility requires the consistent referencing of system entities, regardless of the system location from which the reference originates. 
+ Access transparency  – Local and remote system entities must remain indistinguishable when viewed through the user interface. The distributed operating system maintains this perception through the exposure of a single access mechanism for a system entity, regardless of that entity being local or remote to the user. Transparency dictates that any differences in methods of accessing any particular system entity—either local or remote—must be both invisible to, and undetectable by the user. 
+ Migration transparency  – Resources and activities migrate from one element to another controlled solely by the system  and without user/application knowledge or action. 
+ Replication transparency  – The process or fact that a resource has been duplicated on another element occurs under system control and without user/application knowledge or intervention. 
+ Concurrency transparency  – Users/applications are unaware of and unaffected by the presence/activities of other users. 
+ Failure transparency  – The system is responsible for detection and remediation of system failures. No user knowledge/action is involved other than waiting for the system to resolve the problem. 
+ Performance Transparency  – The system is responsible for the detection and remediation of local or global performance shortfalls. Note that system policies may prefer some users/user classes/tasks over others. No user knowledge or interaction. is involved. 
+ Size/Scale transparency  – The system is responsible for managing its geographic reach, number of nodes, level of node capability without any required user knowledge or interaction. 
+ Revision transparency  – The system is responsible for upgrades and revisions and changes to system infrastructure without user knowledge or action. 
+ Control transparency  – The system is responsible for providing all system information, constants, properties, configuration settings, etc. in a consistent appearance, connotation, and denotation to all users and applications. 
+ Data transparency  – The system is responsible for providing data to applications without user knowledge or action relating to where the system stores it. 
+ Parallelism transparency  – The system is responsible for exploiting any ability to parallelize task execution without  user knowledge or interaction. Arguably the most difficult aspect of transparency, and described by Tanenbaum as the "Holy grail" for distributed system designers. 
+
+ **Inter-process communication**
+
+ Inter-Process Communication (IPC) is the implementation of general communication, process interaction, and dataflow between threads and/or processes both within a node, and between nodes in a distributed OS. The intra-node and inter-node communication requirements drive low-level IPC design, which is the typical approach to implementing communication functions that support transparency. In this sense, Interprocess communication is the greatest underlying concept in the low-level design considerations of a distributed operating system.
+ 
+
+ **Process management**
+
+ Process management provides policies and mechanisms for effective and efficient sharing of resources between distributed processes. These policies and mechanisms support operations involving the allocation and de-allocation of processes and ports to processors, as well as mechanisms to run, suspend, migrate, halt, or resume process execution. While these resources and operations can be either local or remote with respect to each other, the distributed OS maintains state and synchronization over all processes in the system.
+ As an example, load balancing is a common process management function. Load balancing monitors node performance and is responsible for shifting activity across nodes when the system is out of balance. One load balancing function is picking a process to move. The kernel may employ several selection mechanisms, including priority-based choice. This mechanism chooses a process based on a policy such as 'newest request'. The system implements the policy
+ 
+
+ **Resource management**
+
+ Systems resources such as memory, files, devices, etc. are distributed throughout a system, and at any given moment, any of these nodes may have light to idle workloads.  Load sharing  and load balancing require many policy-oriented decisions, ranging from finding idle CPUs, when to move, and which to move. Many algorithms exist to aid in these decisions; however, this calls for a second level of decision making policy in choosing the algorithm best suited for the scenario, and the conditions surrounding the scenario.
+ 
+
+ **Reliability**
+
+ Distributed OS can provide the necessary resources and services to achieve high levels of  reliability , or the ability to prevent and/or recover from errors. Faults are physical or logical defects that can cause errors in the system. For a system to be reliable, it must somehow overcome the adverse effects of faults.
+ The primary methods for dealing with faults include  fault avoidance , fault tolerance, and  fault detection and recovery . Fault avoidance covers proactive measures taken to minimize the occurrence of faults. These proactive measures can be in the form of  transactions , replication and backups. Fault tolerance is the ability of a system to continue operation in the presence of a fault. In the event, the system should detect and recover full functionality. In any event, any actions taken should make every effort to preserve the  single system image .
+ 
+
+ **Availability**
+
+ Availability is the fraction of time during which the system can respond to requests.
+ 
+
+ **Performance**
+
+ Many benchmark metrics quantify performance; throughput, response time, job completions per unit time, system utilization, etc. With respect to a distributed OS, performance most often distills to a balance between process parallelism and IPC. Managing the task granularity of parallelism in a sensible relation to the messages required for support is extremely effective. Also, identifying when it is more beneficial to migrate a process to its data, rather than copy the data, is effective as well. 
+
+ **Synchronization**
+
+ Cooperating concurrent processes have an inherent need for synchronization, which ensures that changes happen in a correct and predictable fashion. Three basic situations that define the scope of this need:
+ 
+ one or more processes must synchronize at a given point for one or more other processes to continue, 
+ one or more processes must wait for an asynchronous condition in order to continue, 
+ or a process must establish exclusive access to a shared resource. Improper synchronization can lead to multiple failure modes including loss of atomicity, consistency, isolation and durability, deadlock, livelock and loss of serializability. 
+
+ **Flexibility**
+
+ Flexibility in a distributed operating system is enhanced through the modular and characteristics of the distributed OS, and by providing a richer set of higher-level services. The completeness and quality of the kernel/microkernel simplifies implementation of such services, and potentially enables service providers greater choice of providers for such services. 
+
+ **Research**
+
+ **Replicated model extended to a component object model**
+
+   Architectural Design of E1 Distributed Operating System   The Cronus distributed operating system   Design and development of MINIX distributed operating system 
+
+ **Complexity/Trust exposure through accepted responsibility**
+
+ Scale and performance in the Denali isolation kernel. 
+
+ **Multi/Many-core focused systems**
+
+ The multikernel: a new OS architecture for scalable multicore systems. 
+ Corey: an Operating System for Many Cores. 
+ Almos: Advanced Locality Management Operating System for cc-NUMA Many-Cores. 
+
+ **Distributed processing over extremes in heterogeneity**
+
+ Helios: heterogeneous multiprocessing with satellite kernels. 
+
+ **Effective and stable in multiple levels of complexity**
+
+ Tessellation: Space-Time Partitioning in a Manycore Client OS. 
+
+ 

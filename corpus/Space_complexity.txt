@@ -1,0 +1,534 @@
+***Space complexity***
+In computer science, the  space complexity  of an algorithm or a computer program is the amount of memory space required to solve an instance of the computational problem as a function of the size of the input. It is the memory required by an algorithm to execute a program and produce output. Similar to time complexity, Space complexity is often expressed asymptotically in big O notation, such as  
+   
+     
+       
+         O 
+         ( 
+         n 
+         ) 
+         , 
+       
+     
+     {\displaystyle O(n),} 
+   
+ 
+   
+     
+       
+         O 
+         ( 
+         n 
+         log 
+         ⁡ 
+         n 
+         ) 
+         , 
+       
+     
+     {\displaystyle O(n\log n),} 
+     
+   
+     
+       
+         O 
+         ( 
+         
+           n 
+           
+             α 
+           
+         
+         ) 
+         , 
+       
+     
+     {\displaystyle O(n^{\alpha }),} 
+     
+   
+     
+       
+         O 
+         ( 
+         
+           2 
+           
+             n 
+           
+         
+         ) 
+         , 
+       
+     
+     {\displaystyle O(2^{n}),} 
+    etc., where  n  is the input size in units of bits needed to represent the input.
+ 
+
+ **Space complexity classes**
+
+ Analogously to time complexity classes DTIME(f(n)) and NTIME(f(n)), the complexity classes DSPACE(f(n)) and NSPACE(f(n)) are the sets of languages that are decidable by deterministic (respectively, non-deterministic) Turing machines that use  
+   
+     
+       
+         O 
+         ( 
+         f 
+         ( 
+         n 
+         ) 
+         ) 
+       
+     
+     {\displaystyle O(f(n))} 
+    space. The complexity classes PSPACE and NPSPACE allow  
+   
+     
+       
+         f 
+       
+     
+     {\displaystyle f} 
+    to be any polynomial, analogously to  P and  NP.  That is,
+ 
+ 
+   
+     
+       
+         
+           
+             P 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         = 
+         
+           ⋃ 
+           
+             c 
+             ∈ 
+             
+               
+                 Z 
+               
+               
+                 + 
+               
+             
+           
+         
+         
+           
+             D 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         ( 
+         
+           n 
+           
+             c 
+           
+         
+         ) 
+       
+     
+     {\displaystyle {\mathsf {PSPACE}}=\bigcup _{c\in \mathbb {Z} ^{+}}{\mathsf {DSPACE}}(n^{c})} 
+   and
+ 
+ 
+   
+     
+       
+         
+           
+             N 
+             P 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         = 
+         
+           ⋃ 
+           
+             c 
+             ∈ 
+             
+               
+                 Z 
+               
+               
+                 + 
+               
+             
+           
+         
+         
+           
+             N 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         ( 
+         
+           n 
+           
+             c 
+           
+         
+         ) 
+       
+     
+     {\displaystyle {\mathsf {NPSPACE}}=\bigcup _{c\in \mathbb {Z} ^{+}}{\mathsf {NSPACE}}(n^{c})} 
+   
+
+ **Relationships between classes**
+
+ The space hierarchy theorem states that, for all space-constructible functions  
+   
+     
+       
+         f 
+         ( 
+         n 
+         ) 
+       
+     
+     {\displaystyle f(n)} 
+   , there exists a problem that can be solved by a machine with  
+   
+     
+       
+         f 
+         ( 
+         n 
+         ) 
+       
+     
+     {\displaystyle f(n)} 
+    memory space, but cannot be solved by a machine with asymptotically less than  
+   
+     
+       
+         f 
+         ( 
+         n 
+         ) 
+       
+     
+     {\displaystyle f(n)} 
+   space.
+ The following containments between complexity classes hold. 
+ 
+   
+     
+       
+         
+           
+             D 
+             T 
+             I 
+             M 
+             E 
+           
+         
+         
+           ( 
+           
+             f 
+             
+               ( 
+               n 
+               ) 
+             
+           
+           ) 
+         
+         ⊆ 
+         
+           
+             D 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         
+           ( 
+           
+             f 
+             
+               ( 
+               n 
+               ) 
+             
+           
+           ) 
+         
+         ⊆ 
+         
+           
+             N 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         
+           ( 
+           
+             f 
+             
+               ( 
+               n 
+               ) 
+             
+           
+           ) 
+         
+         ⊆ 
+         
+           
+             D 
+             T 
+             I 
+             M 
+             E 
+           
+         
+         
+           ( 
+           
+             2 
+             
+               O 
+               
+                 ( 
+                 
+                   f 
+                   
+                     ( 
+                     n 
+                     ) 
+                   
+                 
+                 ) 
+               
+             
+           
+           ) 
+         
+       
+     
+     {\displaystyle {\mathsf {DTIME}}\left(f\left(n\right)\right)\subseteq {\mathsf {DSPACE}}\left(f\left(n\right)\right)\subseteq {\mathsf {NSPACE}}\left(f\left(n\right)\right)\subseteq {\mathsf {DTIME}}\left(2^{O\left(f\left(n\right)\right)}\right)} 
+   Furthermore, Savitch's theorem gives the reverse containment that if  
+   
+     
+       
+         f 
+         ∈ 
+         Ω 
+         ( 
+         log 
+         ⁡ 
+         ( 
+         n 
+         ) 
+         ) 
+       
+     
+     {\displaystyle f\in \Omega (\log(n))} 
+   ,
+ 
+ 
+   
+     
+       
+         
+           
+             N 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         
+           ( 
+           
+             f 
+             
+               ( 
+               n 
+               ) 
+             
+           
+           ) 
+         
+         ⊆ 
+         
+           
+             D 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         
+           ( 
+           
+             
+               ( 
+               
+                 f 
+                 
+                   ( 
+                   n 
+                   ) 
+                 
+               
+               ) 
+             
+             
+               2 
+             
+           
+           ) 
+         
+         . 
+       
+     
+     {\displaystyle {\mathsf {NSPACE}}\left(f\left(n\right)\right)\subseteq {\mathsf {DSPACE}}\left(\left(f\left(n\right)\right)^{2}\right).} 
+   As a direct corollary,  
+   
+     
+       
+         
+           
+             P 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         = 
+         
+           
+             N 
+             P 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+       
+     
+     {\displaystyle {\mathsf {PSPACE}}={\mathsf {NPSPACE}}} 
+   . This result is surprising because it suggests that non-determinism can reduce the space necessary to solve a problem only by a small amount. In contrast, the exponential time hypothesis conjectures that for time complexity, there can be an exponential gap between deterministic and non-deterministic complexity.
+ The Immerman–Szelepcsényi theorem states that, again for  
+   
+     
+       
+         f 
+         ∈ 
+         Ω 
+         ( 
+         log 
+         ⁡ 
+         ( 
+         n 
+         ) 
+         ) 
+       
+     
+     {\displaystyle f\in \Omega (\log(n))} 
+   ,  
+   
+     
+       
+         
+           
+             N 
+             S 
+             P 
+             A 
+             C 
+             E 
+           
+         
+         ( 
+         f 
+         ( 
+         n 
+         ) 
+         ) 
+       
+     
+     {\displaystyle {\mathsf {NSPACE}}(f(n))} 
+    is closed under complementation. This shows another qualitative difference between time and space complexity classes, as nondeterministic time complexity classes are not believed to be closed under complementation; for instance, it is conjectured that NP ≠ co-NP. 
+
+ **LOGSPACE**
+
+ L or LOGSPACE is the set of problems that can be solved by a deterministic Turing machine using only  
+   
+     
+       
+         O 
+         ( 
+         log 
+         ⁡ 
+         n 
+         ) 
+       
+     
+     {\displaystyle O(\log n)} 
+    memory space with regards to input size. Even a single counter that can index the entire  
+   
+     
+       
+         n 
+       
+     
+     {\displaystyle n} 
+   -bit input requires  
+   
+     
+       
+         log 
+         ⁡ 
+         n 
+       
+     
+     {\displaystyle \log n} 
+    space, so LOGSPACE algorithms can maintain only a constant number of counters or other variables of similar bit complexity.
+ LOGSPACE and other sub-linear space complexity is useful when processing large data that cannot fit into a computer's RAM. They are related to Streaming algorithms, but only restrict how much memory can be used, while streaming algorithms have further constraints on how the input is fed into the algorithm.
+This class also sees use in the field of pseudorandomness and derandomization, where researchers consider the open problem of whether L = RL. The corresponding nondeterministic space complexity class is NL.
+ 
+
+ 

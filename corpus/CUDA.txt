@@ -1,0 +1,130 @@
+***CUDA***
+CUDA  (Compute Unified Device Architecture) is a parallel computing platform and application programming interface (API) model created by Nvidia. It allows software developers and software engineers to use a CUDA-enabled graphics processing unit (GPU) for general purpose processing –  an approach termed GPGPU (General-Purpose computing on Graphics Processing Units). The CUDA platform is a software layer that gives direct access to the GPU's virtual instruction set and parallel computational elements, for the execution of compute kernels. The CUDA platform is designed to work with programming languages such as C, C++, and Fortran. This accessibility makes it easier for specialists in parallel programming to use GPU resources, in contrast to prior APIs like Direct3D and OpenGL, which required advanced skills in graphics programming. CUDA-powered GPUs also support programming frameworks such as OpenACC and OpenCL; and HIP by compiling such code to CUDA. When CUDA was first introduced by Nvidia, the name was an acronym for Compute Unified Device Architecture, but Nvidia subsequently dropped the common use of the acronym.
+ 
+
+ **Background**
+
+ The graphics processing unit (GPU), as a specialized computer processor, addresses the demands of real-time high-resolution 3D graphics compute-intensive tasks. By 2012, GPUs had evolved into highly parallel multi-core systems allowing very efficient manipulation of large blocks of data. This design is more effective than general-purpose central processing unit (CPUs) for algorithms in situations where processing large blocks of data is done in parallel, such as:
+ 
+ push-relabel maximum flow algorithm 
+ fast sort algorithms of large lists 
+ two-dimensional fast wavelet transform 
+ molecular dynamics simulations 
+ machine learning 
+
+ **Programming abilities**
+
+ The CUDA platform is accessible to software developers through CUDA-accelerated libraries, compiler directives such as OpenACC, and extensions to industry-standard programming languages including C, C++ and Fortran. C/C++ programmers can use 'CUDA C/C++', compiled with  nvcc , Nvidia's LLVM-based C/C++ compiler. Fortran programmers can use 'CUDA Fortran', compiled with the PGI CUDA Fortran compiler from The Portland Group.
+ In addition to libraries, compiler directives, CUDA C/C++ and CUDA Fortran, the CUDA platform supports other computational interfaces, including the Khronos Group's OpenCL, Microsoft's DirectCompute, OpenGL Compute Shaders and C++ AMP. Third party wrappers are also available for Python, Perl, Fortran, Java, Ruby, Lua, Common Lisp, Haskell, R, MATLAB, IDL, Julia, and native support in Mathematica.
+ In the computer game industry, GPUs are used for graphics rendering, and for game physics calculations (physical effects such as debris, smoke, fire, fluids); examples include PhysX and Bullet. CUDA has also been used to accelerate non-graphical applications in computational biology, cryptography and other fields by an order of magnitude or more. CUDA provides both a low level API (CUDA  Driver  API, non single-source) and a higher level API (CUDA  Runtime  API, single-source). The initial CUDA SDK was made public on 15 February 2007, for Microsoft Windows and Linux. Mac OS X support was later added in version 2.0, which supersedes the beta released February 14, 2008. CUDA works with all Nvidia GPUs from the G8x series onwards, including GeForce, Quadro and the Tesla line. CUDA is compatible with most standard operating systems. Nvidia states that programs developed for the G8x series will also work without modification on all future Nvidia video cards, due to binary compatibility. CUDA 8.0 comes with the following libraries (for compilation & runtime, in alphabetical order):
+ 
+ cuBLAS – CUDA Basic Linear Algebra Subroutines library, see main and docs 
+ CUDART – CUDA Runtime library, see docs 
+ cuFFT – CUDA Fast Fourier Transform library, see main and docs 
+ cuRAND – CUDA Random Number Generation library, see main and docs 
+ cuSOLVER – CUDA based collection of dense and sparse direct solvers, see main and docs 
+ cuSPARSE – CUDA Sparse Matrix library, see main and docs 
+ NPP – NVIDIA Performance Primitives library, see main and docs 
+ nvGRAPH – NVIDIA Graph Analytics library, see main and docs 
+ NVML – NVIDIA Management Library, see main and docs 
+ NVRTC – NVIDIA Runtime Compilation library for CUDA C++, see docs CUDA 8.0 comes with these other software components:
+ 
+ nView – NVIDIA nView Desktop Management Software, see main and docs (pdf) 
+ NVWMI – NVIDIA Enterprise Management Toolkit, see main and docs (chm) 
+ GameWorks PhysX – is a multi-platform game physics engine, see main and docs CUDA 9.0-9.2 comes with these other components:
+ 
+ CUTLASS 1.0 – custom linear algebra algorithms, see CUDA 9.2 News, Developer News and dev blog 
+ NVCUVID  – NVIDIA Video Decoder got deprecated in CUDA 9.2; it is now available in NVIDIA Video Codec SDK CUDA 10 comes with these other components:
+ 
+ nvJPEG – Hybrid JPEG Processing, see CUDA 10 News and main and actual Release Notes 
+
+ **Advantages**
+
+ CUDA has several advantages over traditional general-purpose computation on GPUs (GPGPU) using graphics APIs:
+ 
+ Scattered reads –  code can read from arbitrary addresses in memory 
+ Unified virtual memory (CUDA 4.0 and above) 
+ Unified memory (CUDA 6.0 and above) 
+ Shared memory –  CUDA exposes a fast shared memory region that can be shared among threads. This can be used as a user-managed cache, enabling higher bandwidth than is possible using texture lookups. 
+ Faster downloads and readbacks to and from the GPU 
+ Full support for integer and bitwise operations, including integer texture lookups 
+
+ **Limitations**
+
+ Whether for the host computer or the GPU device, all CUDA source code is now processed according to C++ syntax rules. This was not always the case. Earlier versions of CUDA were based on C syntax rules. As with the more general case of compiling C code with a C++ compiler, it is therefore possible that old C-style CUDA source code will either fail to compile or will not behave as originally intended. 
+ Interoperability with rendering languages such as OpenGL is one-way, with OpenGL having access to registered CUDA memory but CUDA not having access to OpenGL memory. 
+ Copying between host and device memory may incur a performance hit due to system bus bandwidth and latency (this can be partly alleviated with asynchronous memory transfers, handled by the GPU's DMA engine) 
+ Threads should be running in groups of at least 32 for best performance, with total number of threads numbering in the thousands. Branches in the program code do not affect performance significantly, provided that each of 32 threads takes the same execution path; the SIMD execution model becomes a significant limitation for any inherently divergent task (e.g. traversing a space partitioning data structure during ray tracing). 
+ Unlike OpenCL, CUDA-enabled GPUs are only available from Nvidia. 
+ No emulator or fallback functionality is available for modern revisions. 
+ Valid C++ may sometimes be flagged and prevent compilation due to the way the compiler approaches optimization for target GPU device limitations. 
+ C++ run-time type information (RTTI) and C++-style exception handling are only supported in host code, not in device code. 
+ In single precision on first generation CUDA compute capability 1.x devices, denormal numbers are unsupported and are instead flushed to zero, and the precisions of the division and square root operations are slightly lower than IEEE 754-compliant single precision math. Devices that support compute capability 2.0 and above support denormal numbers, and the division and square root operations are IEEE 754 compliant by default. However, users can obtain the prior faster gaming-grade math of compute capability 1.x devices if desired by setting compiler flags to disable accurate divisions and accurate square roots, and enable flushing denormal numbers to zero. 
+
+ **GPUs supported**
+
+ Supported CUDA level of GPU and card. See also at Nvidia:
+ 
+ CUDA SDK 1.0 support for compute capability 1.0 – 1.1 (Tesla) 
+ CUDA SDK 1.1 support for compute capability 1.0 – 1.1+x (Tesla) 
+ CUDA SDK 2.0 support for compute capability 1.0 – 1.1+x (Tesla) 
+ CUDA SDK 2.1 – 2.3.1 support for compute capability 1.0 – 1.3 (Tesla) 
+ CUDA SDK 3.0 – 3.1 support for compute capability 1.0 – 2.0 (Tesla, Fermi) 
+ CUDA SDK 3.2 support for compute capability 1.0 – 2.1 (Tesla, Fermi) 
+ CUDA SDK 4.0 – 4.2 support for compute capability 1.0 – 2.1+x (Tesla, Fermi, more?) 
+ CUDA SDK 5.0 – 5.5 support for compute capability 1.0 – 2.1+x (Tesla, Fermi, more?) 
+ CUDA SDK 6.0 support for compute capability 1.0 – 3.5 (Tesla, Fermi, Kepler) 
+ CUDA SDK 6.5 support for compute capability 1.1 – 5.x (Tesla, Fermi, Kepler, Maxwell). Last version with support for compute capability 1.x (Tesla) 
+ CUDA SDK 7.0 – 7.5 support for compute capability 2.0 – 5.x (Fermi, Kepler, Maxwell) 
+ CUDA SDK 8.0 support for compute capability 2.0 – 6.x (Fermi, Kepler, Maxwell, Pascal). Last version with support for compute capability 2.x (Fermi) 
+ CUDA SDK 9.0 – 9.2 support for compute capability 3.0 – 7.2 (Kepler, Maxwell, Pascal, Volta) 
+ CUDA SDK 10.0 – 10.2 support for compute capability 3.0 – 7.5 (Kepler, Maxwell, Pascal, Volta, Turing). Last version with support for compute capability 3.x (Kepler). Due to ongoing disputes between Apple and Nvidia, 10.2 is the last official release for macOS, as support will not be available for macOS in newer releases. 
+ '*' – OEM-only products
+ 
+
+ **Example**
+
+ This example code in C++ loads a texture from an image into an array on the GPU:
+ 
+
+ Below is an example given in Python that computes the product of two arrays on the GPU. The unofficial Python language bindings can be obtained from  PyCUDA . 
+
+ Additional Python bindings to simplify matrix multiplication operations can be found in the program  pycublas . 
+
+ **Language bindings**
+
+ Common Lisp – cl-cuda 
+ Clojure – ClojureCUDA 
+ Fortran – FORTRAN CUDA, PGI CUDA Fortran Compiler 
+ F# – Alea.CUDA 
+ Haskell – Data.Array.Accelerate 
+ IDL – GPULib 
+ Java – jCUDA, JCuda, JCublas, JCufft, CUDA4J 
+ Julia – CUDAnative.jl 
+ Lua – KappaCUDA 
+ Wolfram Mathematica – CUDALink 
+ MATLAB – Parallel Computing Toolbox, MATLAB Distributed Computing Server, and 3rd party packages like Jacket. 
+ .NET – CUDA.NET, Managed CUDA, CUDAfy.NET .NET kernel and host code, CURAND, CUBLAS, CUFFT 
+ Perl – KappaCUDA, CUDA::Minimal, AI::MXNet::CudaKernel 
+ Python – Numba, NumbaPro, PyCUDA, KappaCUDA, Theano 
+ Ruby – KappaCUDA (Broken link) 
+ R – gpuRcuda 
+
+ **Current and future usages of CUDA architecture**
+
+ Accelerated rendering of 3D graphics 
+ Accelerated interconversion of video file formats 
+ Accelerated encryption, decryption and compression 
+ Bioinformatics, e.g. NGS DNA sequencing BarraCUDA 
+ Distributed calculations, such as predicting the native conformation of proteins 
+ Medical analysis simulations, for example virtual reality based on CT and MRI scan images 
+ Physical simulations, in particular in fluid dynamics 
+ Neural network training in machine learning problems 
+ Face recognition 
+ Distributed computing 
+ Molecular dynamics 
+ Mining cryptocurrencies 
+ BOINC SETI@home 
+ Structure from motion (SfM) software 
+
+ 

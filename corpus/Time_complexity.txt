@@ -1,0 +1,968 @@
+***Time complexity***
+In computer science, the  time complexity  is the computational complexity that describes the amount of time it takes to run an algorithm. Time complexity is commonly estimated by counting the number of elementary operations performed by the algorithm, supposing that each elementary operation takes a fixed amount of time to perform. Thus, the amount of time taken and the number of elementary operations performed by the algorithm are taken to differ by at most a constant factor.
+ Since an algorithm's running time may vary among different inputs of the same size, one commonly considers the worst-case time complexity, which is the maximum amount of time required for inputs of a given size. Less common, and usually specified explicitly, is the average-case complexity, which is the average of the time taken on inputs of a given size (this makes sense because there are only a finite number of possible inputs of a given size). In both cases, the time complexity is generally expressed as a function of the size of the input. Since this function is generally difficult to compute exactly, and the running time for small inputs is usually not consequential, one commonly focuses on the behavior of the complexity when the input size increases—that is, the asymptotic behavior of the complexity. Therefore, the time complexity is commonly expressed using big O notation, typically  
+   
+     
+       
+         O 
+         ( 
+         n 
+         ) 
+         , 
+       
+     
+     {\displaystyle O(n),} 
+   
+ 
+   
+     
+       
+         O 
+         ( 
+         n 
+         log 
+         ⁡ 
+         n 
+         ) 
+         , 
+       
+     
+     {\displaystyle O(n\log n),} 
+     
+   
+     
+       
+         O 
+         ( 
+         
+           n 
+           
+             α 
+           
+         
+         ) 
+         , 
+       
+     
+     {\displaystyle O(n^{\alpha }),} 
+     
+   
+     
+       
+         O 
+         ( 
+         
+           2 
+           
+             n 
+           
+         
+         ) 
+         , 
+       
+     
+     {\displaystyle O(2^{n}),} 
+    etc., where  n  is the input size in units of bits needed to represent the input.
+ Algorithmic complexities are classified according to the type of function appearing in the big O notation. For example, an algorithm with time complexity  
+   
+     
+       
+         O 
+         ( 
+         n 
+         ) 
+       
+     
+     {\displaystyle O(n)} 
+    is a  linear time algorithm  and an algorithm with time complexity  
+   
+     
+       
+         O 
+         ( 
+         
+           n 
+           
+             α 
+           
+         
+         ) 
+       
+     
+     {\displaystyle O(n^{\alpha })} 
+    for some constant  
+   
+     
+       
+         α 
+         > 
+         1 
+       
+     
+     {\displaystyle \alpha >1} 
+    is a  polynomial time algorithm .
+ 
+
+ **Table of common time complexities**
+
+ The following table summarizes some classes of commonly encountered time complexities. In the table, poly( x ) =  x O (1) , i.e., polynomial in  x .
+ 
+
+ **Constant time**
+
+ An algorithm is said to be  constant time  (also written as  O(1)  time) if the value of  T ( n ) is bounded by a value that does not depend on the size of the input. For example, accessing any single element in an array takes constant time as only one operation has to be performed to locate it. In a similar manner, finding the minimal value in an array sorted in ascending order; it is the first element. However, finding the minimal value in an unordered array is not a constant time operation as scanning over each element in the array is needed in order to determine the minimal value. Hence it is a linear time operation, taking O(n) time. If the number of elements is known in advance and does not change, however, such an algorithm can still be said to run in constant time.
+ Despite the name "constant time", the running time does not have to be independent of the problem size, but an upper bound for the running time has to be bounded independently of the problem size. For example, the task "exchange the values of  a  and  b  if necessary so that  a ≤ b " is called constant time even though the time may depend on whether or not it is already true that  a  ≤  b . However, there is some constant  t  such that the time required is always  at most   t .
+ Here are some examples of code fragments that run in constant time :
+ 
+ int index = 5;
+int item = list[index];
+ if  (condition true)  then 
+   perform some operation that runs in constant time
+ else 
+   perform some other operation that runs in constant time
+ for  i = 1  to  100
+    for  j = 1  to  200
+      perform some operation that runs in constant time
+ 
+ If  T ( n ) is O( any constant value ), this is equivalent to and stated in standard notation as  T ( n ) being O(1).
+ 
+
+ **Logarithmic time**
+
+ An algorithm is said to take  logarithmic time  when  T ( n ) =  O(log  n ) .  Since log a   n  and log b   n  are related by a constant multiplier, and such a multiplier is irrelevant to big-O classification, the standard usage for logarithmic-time algorithms is O(log  n ) regardless of the base of the logarithm appearing in the expression of  T .
+ Algorithms taking logarithmic time are commonly found in operations on binary trees or when using binary search.
+ An O(log n) algorithm is considered highly efficient, as the ratio of the number of operations to the size of the input decreases and tends to zero when  n  increases. An algorithm that must access all elements of its input cannot take logarithmic time, as the time taken for reading an input of size  n  is of the order of  n .
+ An example of logarithmic time is given by dictionary search. Consider a dictionary  D  which contains  n  entries, sorted by alphabetical order. We suppose that, for  1 ≤  k  ≤  n , one may access to the  k th entry of the dictionary in a constant time. Let  D ( k )  denote this  k -th entry. Under these hypotheses, the test if a word  w  is in the dictionary may be done in logarithmic time: consider  
+   
+     
+       
+         D 
+         ( 
+         ⌊ 
+         n 
+         
+           / 
+         
+         2 
+         ⌋ 
+         ) 
+         , 
+       
+     
+     {\displaystyle D(\lfloor n/2\rfloor ),} 
+    where  
+   
+     
+       
+         ⌊ 
+         
+         ⌋ 
+       
+     
+     {\displaystyle \lfloor \;\rfloor } 
+    denotes the floor function. If  
+   
+     
+       
+         w 
+         = 
+         D 
+         ( 
+         ⌊ 
+         n 
+         
+           / 
+         
+         2 
+         ⌋ 
+         ) 
+         , 
+       
+     
+     {\displaystyle w=D(\lfloor n/2\rfloor ),} 
+    then we are done. Else, if  
+   
+     
+       
+         w 
+         < 
+         D 
+         ( 
+         ⌊ 
+         n 
+         
+           / 
+         
+         2 
+         ⌋ 
+         ) 
+         , 
+       
+     
+     {\displaystyle w<D(\lfloor n/2\rfloor ),} 
+    continue the search in the same way in the left half of the dictionary, otherwise continue similarly with the right half of the dictionary. This algorithm is similar to the method often used to find an entry in a paper dictionary.
+ 
+
+ **Polylogarithmic time**
+
+ An algorithm is said to run in  polylogarithmic time  if  T ( n ) = O((log  n ) k ), for some constant  k . For example, matrix chain ordering can be solved in polylogarithmic time on a parallel random-access machine. 
+
+ **Sub-linear time**
+
+ An algorithm is said to run in  sub-linear time  (often spelled  sublinear time ) if  T ( n ) = o( n ). In particular this includes algorithms with the time complexities defined above.
+ Typical algorithms that are exact and yet run in sub-linear time use parallel processing (as the NC 1  matrix determinant calculation does), or alternatively have guaranteed assumptions on the input structure (as the logarithmic time binary search and many tree maintenance algorithms do). However, formal languages such as the set of all strings that have a 1-bit in the position indicated by the first log(n) bits of the string may depend on every bit of the input and yet be computable in sub-linear time.
+ The specific term  sublinear time algorithm  is usually reserved to algorithms that are unlike the above in that they are run over classical serial machine models and are not allowed prior assumptions on the input. They are however allowed to be randomized, and indeed must be randomized for all but the most trivial of tasks.
+ As such an algorithm must provide an answer without reading the entire input, its particulars heavily depend on the access allowed to the input. Usually for an input that is represented as a binary string  b 1 ,..., b k  it is assumed that the algorithm can in time O(1) request and obtain the value of  b i  for any  i .
+ Sub-linear time algorithms are typically randomized, and provide only approximate solutions. In fact, the property of a binary string having only zeros (and no ones) can be easily proved not to be decidable by a (non-approximate) sub-linear time algorithm. Sub-linear time algorithms arise naturally in the investigation of property testing.
+ 
+
+ **Linear time**
+
+ An algorithm is said to take  linear time , or  O ( n )  time, if its time complexity is  O ( n ) . Informally, this means that the running time increases at most linearly with the size of the input. More precisely, this means that there is a constant  c  such that the running time is at most  cn  for every input of size  n . For example, a procedure that adds up all elements of a list requires time proportional to the length of the list, if the adding time is constant, or, at least, bounded by a constant.
+ Linear time is the best possible time complexity in situations where the algorithm has to sequentially read its entire input. Therefore, much research has been invested into discovering algorithms exhibiting linear time or, at least, nearly linear time. This research includes both software and hardware methods. There are several hardware technologies which exploit parallelism to provide this. An example is content-addressable memory. This concept of linear time is used in string matching algorithms such as the Boyer–Moore algorithm and Ukkonen's algorithm.
+ 
+
+ **Quasilinear time**
+
+ An algorithm is said to run in  quasilinear time  (also referred to as  log-linear time ) if  T ( n ) =  O( n  log k   n )  for some positive constant  k ;  linearithmic time  is the case  k  = 1. Using soft O notation these algorithms are Õ( n ). Quasilinear time algorithms are also O( n 1+ε ) for every constant ε > 0, and thus run faster than any polynomial time algorithm whose time bound includes a term  n c  for any  c  > 1.
+ Algorithms which run in quasilinear time include:
+ 
+ In-place merge sort, O( n  log 2   n ) 
+ Quicksort, O( n  log  n ), in its randomized version, has a running time that is O( n  log  n ) in expectation on the worst-case input. Its non-randomized version has an O( n  log  n ) running time only when considering average case complexity. 
+ Heapsort, O( n  log  n ), merge sort, introsort, binary tree sort, smoothsort, patience sorting, etc. in the worst case 
+ Fast Fourier transforms, O( n  log  n ) 
+ Monge array calculation, O( n  log  n ) In many cases, the  n  · log  n  running time is simply the result of performing a Θ(log  n ) operation  n  times (for the notation, see Big O notation § Family of Bachmann–Landau notations).  For example, binary tree sort creates a binary tree by inserting each element of the  n -sized array one by one.  Since the insert operation on a self-balancing binary search tree takes  O (log  n ) time, the entire algorithm takes  O ( n  log  n ) time.
+ Comparison sorts require at least  Ω ( n  log  n ) comparisons in the worst case because log( n !) = Θ( n  log  n ), by Stirling's approximation. They also frequently arise from the recurrence relation  T ( n ) = 2 T ( n /2) +  O ( n ).
+ 
+
+ **Sub-quadratic time**
+
+ An algorithm is said to be  subquadratic time  if  T ( n ) = o( n 2 ).
+ For example, simple, comparison-based sorting algorithms are quadratic (e.g. insertion sort), but more advanced algorithms can be found that are subquadratic (e.g. Shell sort). No general-purpose sorts run in linear time, but the change from quadratic to sub-quadratic is of great practical importance.
+ 
+
+ **Polynomial time**
+
+ An algorithm is said to be of  polynomial time  if its running time is upper bounded by a polynomial expression in the size of the input for the algorithm, i.e.,  T ( n ) = O( n k ) for some positive constant  k . Problems for which a deterministic polynomial time algorithm exists belong to the complexity class  P , which is central in the field of computational complexity theory. Cobham's thesis states that polynomial time is a synonym for "tractable", "feasible", "efficient", or "fast". Some examples of polynomial time algorithms:
+ 
+ The selection sort sorting algorithm on  n  integers performs  
+   
+     
+       
+         A 
+         
+           n 
+           
+             2 
+           
+         
+       
+     
+     {\displaystyle An^{2}} 
+    operations for some constant  A . Thus it runs in time  
+   
+     
+       
+         O 
+         ( 
+         
+           n 
+           
+             2 
+           
+         
+         ) 
+       
+     
+     {\displaystyle O(n^{2})} 
+    and is a polynomial time algorithm. 
+ All the basic arithmetic operations (addition, subtraction, multiplication, division, and comparison) can be done in polynomial time. 
+ Maximum matchings in graphs can be found in polynomial time. 
+
+ **Strongly and weakly polynomial time**
+
+ In some contexts, especially in optimization, one differentiates between  strongly polynomial time  and  weakly polynomial time  algorithms. These two concepts are only relevant if the inputs to the algorithms consist of integers.
+ Strongly polynomial time is defined in the arithmetic model of computation. In this model of computation the basic arithmetic operations (addition, subtraction, multiplication, division, and comparison) take a unit time step to perform, regardless of the sizes of the operands. The algorithm runs in strongly polynomial time if 
+ the number of operations in the arithmetic model of computation is bounded by a polynomial in the number of integers in the input instance; and 
+ the space used by the algorithm is bounded by a polynomial in the size of the input. Any algorithm with these two properties can be converted to a polynomial time algorithm by replacing the arithmetic operations by suitable algorithms for performing the arithmetic operations on a Turing machine. If the second of the above requirements is not met, then this is not true anymore. Given the integer  
+   
+     
+       
+         
+           2 
+           
+             n 
+           
+         
+       
+     
+     {\displaystyle 2^{n}} 
+    (which takes up space proportional to  n  in the Turing machine model), it is possible to compute  
+   
+     
+       
+         
+           2 
+           
+             
+               2 
+               
+                 n 
+               
+             
+           
+         
+       
+     
+     {\displaystyle 2^{2^{n}}} 
+   
+with  n  multiplications using repeated squaring. However, the space used to represent  
+   
+     
+       
+         
+           2 
+           
+             
+               2 
+               
+                 n 
+               
+             
+           
+         
+       
+     
+     {\displaystyle 2^{2^{n}}} 
+    is proportional to  
+   
+     
+       
+         
+           2 
+           
+             n 
+           
+         
+       
+     
+     {\displaystyle 2^{n}} 
+   , and thus exponential rather than polynomial in the space used to represent the input. Hence, it is not possible to carry out this computation in polynomial time on a Turing machine, but it is possible to compute it by polynomially many arithmetic operations.
+ Conversely, there are algorithms that run in a number of Turing machine steps bounded by a polynomial in the length of binary-encoded input, but do not take a number of arithmetic operations bounded by a polynomial in the number of input numbers. The Euclidean algorithm for computing the greatest common divisor of two integers is one example. Given two integers  
+   
+     
+       
+         a 
+       
+     
+     {\displaystyle a} 
+    and  
+   
+     
+       
+         b 
+       
+     
+     {\displaystyle b} 
+   , the algorithm 
+performs  
+   
+     
+       
+         O 
+         ( 
+         log 
+         ⁡ 
+           
+         a 
+         + 
+         log 
+         ⁡ 
+           
+         b 
+         ) 
+       
+     
+     {\displaystyle O(\log \ a+\log \ b)} 
+    arithmetic operations on numbers with 
+at most  
+   
+     
+       
+         O 
+         ( 
+         log 
+         ⁡ 
+           
+         a 
+         + 
+         log 
+         ⁡ 
+           
+         b 
+         ) 
+       
+     
+     {\displaystyle O(\log \ a+\log \ b)} 
+    bits.
+At the same time, the number of arithmetic operations cannot be bounded by the number of integers in the input (which is constant in this case, there are always only two integers in the input). Due to the latter observation, the algorithm does not run in strongly polynomial time. Its real running time depends on the magnitudes of  
+   
+     
+       
+         a 
+       
+     
+     {\displaystyle a} 
+    and  
+   
+     
+       
+         b 
+       
+     
+     {\displaystyle b} 
+    and not only on the number of integers in the input.
+ An algorithm that runs in polynomial time but that is not strongly polynomial is said to run in  weakly polynomial time .
+A well-known example of a problem for which a weakly polynomial-time algorithm is known, but is not known to admit a strongly polynomial-time algorithm,
+is linear programming. Weakly polynomial-time should not be confused with pseudo-polynomial time.
+ 
+
+ **Complexity classes**
+
+ The concept of polynomial time leads to several complexity classes in computational complexity theory. Some important classes defined using polynomial time are the following.
+ 
+ P is the smallest time-complexity class on a deterministic machine which is robust in terms of machine model changes. (For example, a change from a single-tape Turing machine to a multi-tape machine can lead to a quadratic speedup, but any algorithm that runs in polynomial time under one model also does so on the other.) Any given abstract machine will have a complexity class corresponding to the problems which can be solved in polynomial time on that machine.
+ 
+
+ **Superpolynomial time**
+
+ An algorithm is said to take  superpolynomial time  if  T ( n ) is not bounded above by any polynomial. Using little omega notation, it is ω( n c ) time for all constants  c , where  n  is the input parameter, typically the number of bits in the input.
+ For example, an algorithm that runs for 2 n  steps on an input of size  n  requires superpolynomial time (more specifically, exponential time).
+ An algorithm that uses exponential resources is clearly superpolynomial, but some algorithms are only very weakly superpolynomial. For example, the Adleman–Pomerance–Rumely primality test runs for  n O(log log  n )  time on  n -bit inputs; this grows faster than any polynomial for large enough  n , but the input size must become impractically large before it cannot be dominated by a polynomial with small degree.
+ An algorithm that requires superpolynomial time lies outside the complexity class  P . Cobham's thesis posits that these algorithms are impractical, and in many cases they are. Since the P versus NP problem is unresolved, no algorithm for an NP-complete problem is currently known to run in polynomial time.
+ 
+
+ **Quasi-polynomial time**
+
+ Quasi-polynomial time  algorithms are algorithms that run slower than polynomial time, yet not so slow as to be exponential time. The worst case running time of a quasi-polynomial time algorithm is  
+   
+     
+       
+         
+           2 
+           
+             O 
+             ( 
+             ( 
+             log 
+             ⁡ 
+             n 
+             
+               ) 
+               
+                 c 
+               
+             
+             ) 
+           
+         
+       
+     
+     {\displaystyle 2^{O((\log n)^{c})}} 
+    for some fixed  
+   
+     
+       
+         c 
+         > 
+         0 
+       
+     
+     {\displaystyle c>0} 
+   . For  
+   
+     
+       
+         c 
+         = 
+         1 
+       
+     
+     {\displaystyle c=1} 
+    we get a polynomial time algorithm, for  
+   
+     
+       
+         c 
+         < 
+         1 
+       
+     
+     {\displaystyle c<1} 
+    we get a sub-linear time algorithm.
+ Quasi-polynomial time algorithms typically arise in reductions from an NP-hard problem to another problem. For example, one can take an instance of an NP hard problem, say 3SAT, and convert it to an instance of another problem B, but the size of the instance becomes  
+   
+     
+       
+         
+           2 
+           
+             O 
+             ( 
+             ( 
+             log 
+             ⁡ 
+             n 
+             
+               ) 
+               
+                 c 
+               
+             
+             ) 
+           
+         
+       
+     
+     {\displaystyle 2^{O((\log n)^{c})}} 
+   . In that case, this reduction does not prove that problem B is NP-hard; this reduction only shows that there is no polynomial time algorithm for B unless there is a quasi-polynomial time algorithm for 3SAT (and thus all of NP). Similarly, there are some problems for which we know quasi-polynomial time algorithms, but no polynomial time algorithm is known. Such problems arise in approximation algorithms; a famous example is the directed Steiner tree problem, for which there is a quasi-polynomial time approximation algorithm achieving an approximation factor of  
+   
+     
+       
+         O 
+         ( 
+         
+           log 
+           
+             3 
+           
+         
+         ⁡ 
+         n 
+         ) 
+       
+     
+     {\displaystyle O(\log ^{3}n)} 
+    (n being the number of vertices), but showing the existence of such a polynomial time algorithm is an open problem.
+ Other computational problems with quasi-polynomial time solutions but no known polynomial time solution include the planted clique problem in which the goal is to find a large clique in the union of a clique and a random graph. Although quasi-polynomially solvable, it has been conjectured that the planted clique problem has no polynomial time solution; this planted clique conjecture has been used as a computational hardness assumption to prove the difficulty of several other problems in computational game theory, property testing, and machine learning. The complexity class  QP  consists of all problems that have quasi-polynomial time algorithms. It can be defined in terms of DTIME as follows. 
+ 
+   
+     
+       
+         
+           
+             QP 
+           
+         
+         = 
+         
+           ⋃ 
+           
+             c 
+             ∈ 
+             
+               N 
+             
+           
+         
+         
+           
+             DTIME 
+           
+         
+         ( 
+         
+           2 
+           
+             ( 
+             log 
+             ⁡ 
+             n 
+             
+               ) 
+               
+                 c 
+               
+             
+           
+         
+         ) 
+       
+     
+     {\displaystyle {\mbox{QP}}=\bigcup _{c\in \mathbb {N} }{\mbox{DTIME}}(2^{(\log n)^{c}})} 
+   
+
+ **Relation to NP-complete problems**
+
+ In complexity theory, the unsolved P versus NP problem asks if all problems in NP have polynomial-time algorithms. All the best-known algorithms for NP-complete problems like 3SAT etc. take exponential time. Indeed, it is conjectured for many natural NP-complete problems that they do not have sub-exponential time algorithms. Here "sub-exponential time" is taken to mean the second definition presented below. (On the other hand, many graph problems represented in the natural way by adjacency matrices are solvable in subexponential time simply because the size of the input is square of the number of vertices.) This conjecture (for the k-SAT problem) is known as the exponential time hypothesis. Since it is conjectured that NP-complete problems do not have quasi-polynomial time algorithms, some inapproximability results in the field of approximation algorithms make the assumption that NP-complete problems do not have quasi-polynomial time algorithms. For example, see the known inapproximability results for the set cover problem.
+ 
+
+ **Sub-exponential time**
+
+ The term  sub-exponential time  is used to express that the running time of some algorithm may grow faster than any polynomial but is still significantly smaller than an exponential. In this sense, problems that have sub-exponential time algorithms are somewhat more tractable than those that only have exponential algorithms. The precise definition of "sub-exponential" is not generally agreed upon, and we list the two most widely used ones below.
+ 
+
+ **First definition**
+
+ A problem is said to be sub-exponential time solvable if it can be solved in running times whose logarithms grow smaller than any given polynomial. More precisely, a problem is in sub-exponential time if for every ε > 0 there exists an algorithm which solves the problem in time O(2 n ε ).  The set of all such problems is the complexity class  SUBEXP  which can be defined in terms of DTIME as follows. 
+ 
+   
+     
+       
+         
+           SUBEXP 
+         
+         = 
+         
+           ⋂ 
+           
+             ε 
+             > 
+             0 
+           
+         
+         
+           DTIME 
+         
+         
+           ( 
+           
+             2 
+             
+               
+                 n 
+                 
+                   ε 
+                 
+               
+             
+           
+           ) 
+         
+       
+     
+     {\displaystyle {\text{SUBEXP}}=\bigcap _{\varepsilon >0}{\text{DTIME}}\left(2^{n^{\varepsilon }}\right)} 
+   This notion of sub-exponential is non-uniform in terms of ε in the sense that ε is not part of the input and each ε may have its own algorithm for the problem.
+ 
+
+ **Second definition**
+
+ Some authors define sub-exponential time as running times in 2 o( n ) . This definition allows larger running times than the first definition of sub-exponential time. An example of such a sub-exponential time algorithm is the best-known classical algorithm for integer factorization, the general number field sieve, which runs in time about  
+   
+     
+       
+         
+           2 
+           
+             
+               
+                 
+                   O 
+                   ~ 
+                 
+               
+             
+             ( 
+             
+               n 
+               
+                 1 
+                 
+                   / 
+                 
+                 3 
+               
+             
+             ) 
+           
+         
+       
+     
+     {\displaystyle 2^{{\tilde {O}}(n^{1/3})}} 
+   , where the length of the input is  n . Another example is the graph isomorphism problem, where Luks's algorithm runs in time  
+   
+     
+       
+         
+           2 
+           
+             O 
+             ( 
+             
+               
+                 n 
+                 log 
+                 ⁡ 
+                 n 
+               
+             
+             ) 
+           
+         
+       
+     
+     {\displaystyle 2^{O({\sqrt {n\log n}})}} 
+   . (In 2015–2017, Babai reduced the complexity of this problem to quasi-polynomial time.)
+ It makes a difference whether the algorithm is allowed to be sub-exponential in the size of the instance, the number of vertices, or the number of edges. In parameterized complexity, this difference is made explicit by considering pairs  
+   
+     
+       
+         ( 
+         L 
+         , 
+         k 
+         ) 
+       
+     
+     {\displaystyle (L,k)} 
+    of decision problems and parameters  k .  SUBEPT  is the class of all parameterized problems that run in time sub-exponential in  k  and polynomial in the input size  n : 
+ 
+   
+     
+       
+         
+           SUBEPT 
+         
+         = 
+         
+           DTIME 
+         
+         
+           ( 
+           
+             
+               2 
+               
+                 o 
+                 ( 
+                 k 
+                 ) 
+               
+             
+             ⋅ 
+             
+               poly 
+             
+             ( 
+             n 
+             ) 
+           
+           ) 
+         
+         . 
+       
+     
+     {\displaystyle {\text{SUBEPT}}={\text{DTIME}}\left(2^{o(k)}\cdot {\text{poly}}(n)\right).} 
+   More precisely, SUBEPT is the class of all parameterized problems  
+   
+     
+       
+         ( 
+         L 
+         , 
+         k 
+         ) 
+       
+     
+     {\displaystyle (L,k)} 
+    for which there is a computable function  
+   
+     
+       
+         f 
+         : 
+         
+           N 
+         
+         → 
+         
+           N 
+         
+       
+     
+     {\displaystyle f:\mathbb {N} \to \mathbb {N} } 
+    with  
+   
+     
+       
+         f 
+         ∈ 
+         o 
+         ( 
+         k 
+         ) 
+       
+     
+     {\displaystyle f\in o(k)} 
+    and an algorithm that decides  L  in time  
+   
+     
+       
+         
+           2 
+           
+             f 
+             ( 
+             k 
+             ) 
+           
+         
+         ⋅ 
+         
+           poly 
+         
+         ( 
+         n 
+         ) 
+       
+     
+     {\displaystyle 2^{f(k)}\cdot {\text{poly}}(n)} 
+   .
+ 
+
+ **Exponential time hypothesis**
+
+ The  exponential time hypothesis  ( ETH ) is that 3SAT, the satisfiability problem of Boolean formulas in conjunctive normal form with, at most, three literals per clause and with  n  variables, cannot be solved in time 2 o ( n ) . More precisely, the hypothesis is that there is some absolute constant  c >0  such that 3SAT cannot be decided in time 2 cn  by any deterministic Turing machine. With  m  denoting the number of clauses, ETH is equivalent to the hypothesis that  k SAT cannot be solved in time 2 o ( m )  for any integer  k  ≥ 3 . The exponential time hypothesis implies P ≠ NP.
+ 
+
+ **Exponential time**
+
+ An algorithm is said to be  exponential time , if  T ( n ) is upper bounded by 2 poly( n ) , where poly( n ) is some polynomial in  n . More formally, an algorithm is exponential time if  T ( n ) is bounded by O(2 n k ) for some constant  k . Problems which admit exponential time algorithms on a deterministic Turing machine form the complexity class known as  EXP .
+ 
+ 
+   
+     
+       
+         
+           EXP 
+         
+         = 
+         
+           ⋃ 
+           
+             c 
+             ∈ 
+             
+               N 
+             
+           
+         
+         
+           DTIME 
+         
+         
+           ( 
+           
+             2 
+             
+               
+                 n 
+                 
+                   c 
+                 
+               
+             
+           
+           ) 
+         
+       
+     
+     {\displaystyle {\text{EXP}}=\bigcup _{c\in \mathbb {N} }{\text{DTIME}}\left(2^{n^{c}}\right)} 
+   Sometimes, exponential time is used to refer to algorithms that have  T ( n ) = 2 O( n ) , where the exponent is at most a linear function of  n . This gives rise to the complexity class  E .
+ 
+ 
+   
+     
+       
+         
+           E 
+         
+         = 
+         
+           ⋃ 
+           
+             c 
+             ∈ 
+             
+               N 
+             
+           
+         
+         
+           DTIME 
+         
+         
+           ( 
+           
+             2 
+             
+               c 
+               n 
+             
+           
+           ) 
+         
+       
+     
+     {\displaystyle {\text{E}}=\bigcup _{c\in \mathbb {N} }{\text{DTIME}}\left(2^{cn}\right)} 
+   
+
+ **Double exponential time**
+
+ An algorithm is said to be double exponential time if  T ( n ) is upper bounded by 2 2 poly( n ) , where poly( n ) is some polynomial in  n . Such algorithms belong to the complexity class 2-EXPTIME.
+ 
+ 
+   
+     
+       
+         
+           
+             2-EXPTIME 
+           
+         
+         = 
+         
+           ⋃ 
+           
+             c 
+             ∈ 
+             
+               N 
+             
+           
+         
+         
+           
+             DTIME 
+           
+         
+         
+           ( 
+           
+             2 
+             
+               
+                 2 
+                 
+                   
+                     n 
+                     
+                       c 
+                     
+                   
+                 
+               
+             
+           
+           ) 
+         
+       
+     
+     {\displaystyle {\mbox{2-EXPTIME}}=\bigcup _{c\in \mathbb {N} }{\mbox{DTIME}}\left(2^{2^{n^{c}}}\right)} 
+   Well-known double exponential time algorithms include:
+ 
+ Decision procedures for Presburger arithmetic 
+ Computing a Gröbner basis (in the worst case) 
+ Quantifier elimination on real closed fields takes at least double exponential time, and can be done in this time. 
+
+ 

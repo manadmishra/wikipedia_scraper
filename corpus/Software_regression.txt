@@ -1,0 +1,9 @@
+***Software regression***
+
+A  software regression  is a software bug that makes a feature stop functioning as intended after a certain event (for example, a system upgrade, system patching or a change to daylight saving time). A  software performance regression  is a situation where the software still functions correctly, but performs more slowly or uses more memory or resources than before. Regressions are often caused by encompassed bug fixes included in software patches. One approach to avoiding this kind of problem is regression testing. A properly designed test plan aims at preventing this possibility before releasing any software. Automated testing and well-written test cases can reduce the likelihood of a regression.
+ A software regression can be of one of three types: 
+ Local – a change introduces a new bug in the changed module or component. 
+ Remote – a change in one part of the software breaks functionality in another module or component. 
+ Unmasked – a change unmasks an already existing bug that had no effect before the change. 
+
+ 
