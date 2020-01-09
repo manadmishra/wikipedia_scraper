@@ -108,13 +108,13 @@ wiki_html = wikipediaapi.Wikipedia(language='en', extract_format=wikipediaapi.Ex
 
 # page_title = sys.argv[1]
 # print(page_title)
-page_title = 'https://en.wikipedia.org/wiki/Software_design'
+page_title = 'https://en.wikipedia.org/wiki/Software_development_process'
 
 page_title = page_title.replace('https://en.wikipedia.org/wiki/', '')
 
 print(page_title)
 
-sys.stdout = open('corpus/raw/'+page_title + '.txt', 'w')
+sys.stdout = open('corpus/'+page_title + '.txt', 'w')
 
 page = wiki_html.page(page_title) # insert title here
 print('***'+page_title.replace('_', ' ')+'***')

@@ -12,7 +12,7 @@ def text_extractor(path):
             # print('Page type: {}'.format(str(type(page))))
 
             text = page.extractText()
-            file1 = open("os_book_silberschatz.txt","a")#append mode 
+            file1 = open("os_extract.txt","a")#append mode 
             file1.write(text) 
             file1.write("\n")
             file1.close() 
@@ -20,7 +20,7 @@ def text_extractor(path):
  
  
 if __name__ == '__main__':
-    path = 'os.pdf'
+    path = 'OS.pdf'
     text_extractor(path)
 
 # import fitz

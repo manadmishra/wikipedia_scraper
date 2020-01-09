@@ -492,3 +492,14 @@ design concepts
 design patterns
 technique
 usage
+practices
+continuous integration
+prototyping
+incremental development
+rapid application development
+agile development
+waterfall development
+spiral development
+offshore development
+process meta-models
+in practice
